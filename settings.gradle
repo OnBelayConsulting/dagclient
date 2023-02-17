@@ -1,0 +1,3 @@
+rootProject.name = 'dagclient'
+include ':construct:dagclientlib',
+        ':construct:dagclientapp'
