@@ -5,6 +5,8 @@ import com.onbelay.core.query.parsing.DefinedQueryBuilder;
 import com.onbelay.core.query.snapshot.QuerySelectedPage;
 import com.onbelay.dagclient.floatindex.service.FloatIndexService;
 import com.onbelay.dagclient.floatindex.snapshot.FloatIndexSnapshot;
+import com.onbelay.dagclientapp.dagnabit.publish.publisher.GraphNodePublisher;
+import com.onbelay.dagclientapp.dagnabit.publish.publisher.GraphRelationshipPublisher;
 import com.onbelay.dagclientapp.floatindex.adapter.FloatIndexRestAdapter;
 import com.onbelay.dagclientapp.floatindex.filereader.FloatIndexFileReader;
 import com.onbelay.dagclientapp.floatindex.filewriter.FloatIndexFileWriter;
@@ -22,14 +24,26 @@ public class FloatIndexRestAdapterBean implements FloatIndexRestAdapter {
     @Autowired
     private FloatIndexService floatIndexService;
 
+    @Autowired
+    private GraphNodePublisher graphNodePublisher;
+
+    @Autowired
+    private GraphRelationshipPublisher graphRelationshipPublisher;
+
     @Override
     public TransactionResult save(FloatIndexSnapshot snapshot) {
-        return floatIndexService.save(snapshot);
+        TransactionResult result =  floatIndexService.save(snapshot);
+        FloatIndexSnapshot updated = floatIndexService.load(result.getEntityId());
+        graphNodePublisher.publish(updated);
+        return result;
     }
 
     @Override
     public TransactionResult save(List<FloatIndexSnapshot> snapshots) {
-        return floatIndexService.save(snapshots);
+        TransactionResult result =  floatIndexService.save(snapshots);
+        List<FloatIndexSnapshot> updated = floatIndexService.load(result.getEntityIds());
+        graphNodePublisher.publish(updated);
+        return result;
     }
 
     @Override

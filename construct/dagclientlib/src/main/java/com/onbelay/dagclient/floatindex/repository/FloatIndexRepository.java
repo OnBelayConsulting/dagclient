@@ -14,6 +14,8 @@ public interface FloatIndexRepository {
 
     public FloatIndex load(EntityId entityId);
 
+    public List<FloatIndex> load(List<EntityId> ids);
+
     public List<Integer> findFloatIndexIds(DefinedQuery definedQuery);
 
     public List<FloatIndex> fetchByIds(QuerySelectedPage selectedPage);

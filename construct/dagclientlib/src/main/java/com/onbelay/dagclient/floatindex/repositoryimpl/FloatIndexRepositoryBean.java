@@ -12,11 +12,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository(value= FloatIndexRepository.NAME)
 @Transactional
 public class FloatIndexRepositoryBean extends BaseRepository<FloatIndex> implements FloatIndexRepository {
     public static final String FIND_INDEX_BY_NAME = "FloatIndex.FIND_INDEX_BY_NAME";
+    public static final String FIND_INDICES_BY_IDS = "FloatIndex.FIND_INDICES_BY_IDS";
 
     @Autowired
     private FloatIndexColumnDefinitions floatIndexColumnDefinitions;
@@ -26,6 +28,16 @@ public class FloatIndexRepositoryBean extends BaseRepository<FloatIndex> impleme
             return find(FloatIndex.class, entityId.getId());
         else
             return null;
+    }
+
+    @Override
+    public List<FloatIndex> load(List<EntityId> entityIds) {
+        List<Integer> ids = entityIds
+                .stream()
+                .map( c-> c.getId())
+                .collect(Collectors.toUnmodifiableList());
+
+        return fetchByIds(new QuerySelectedPage(ids));
     }
 
     @Override

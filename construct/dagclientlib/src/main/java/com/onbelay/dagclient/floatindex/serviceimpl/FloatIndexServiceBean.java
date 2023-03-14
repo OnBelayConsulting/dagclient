@@ -58,12 +58,19 @@ public class FloatIndexServiceBean implements FloatIndexService {
 
     @Override
     public FloatIndexSnapshot load(EntityId entityId) {
-        FloatIndex node = floatIndexRepository.load(entityId);
-        if (node == null)
+        FloatIndex index = floatIndexRepository.load(entityId);
+        if (index == null)
             throw new OBRuntimeException(TransactionErrorCode.MISSING_FLOAT_INDEX.getCode());
 
         FloatIndexAssembler assembler = new FloatIndexAssembler();
-        return assembler.assemble(node);
+        return assembler.assemble(index);
+    }
+
+    @Override
+    public List<FloatIndexSnapshot> load(List<EntityId> ids) {
+        List<FloatIndex> indices = floatIndexRepository.load(ids);
+        FloatIndexAssembler assembler = new FloatIndexAssembler();
+        return assembler.assemble(indices);
     }
 
     @Override

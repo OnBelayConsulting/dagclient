@@ -1,4 +1,4 @@
-package com.onbelay.dagclientapp.dagnabit.service;
+package com.onbelay.dagclientapp.dagnabit.serviceimpl.service;
 
 import com.onbelay.dagclientapp.common.snapshot.WebResult;
 import com.onbelay.dagclientapp.dagnabit.snapshot.DagModelSnapshot;

@@ -3,7 +3,7 @@ package com.onbelay.dagclientapp.dagnabit.serviceimpl;
 import com.onbelay.dagclientapp.common.snapshot.WebResult;
 import com.onbelay.dagclientapp.dagnabit.restclient.CreateDagModelRestClient;
 import com.onbelay.dagclientapp.dagnabit.restclient.GetDagModelsRestClient;
-import com.onbelay.dagclientapp.dagnabit.service.DagnabitService;
+import com.onbelay.dagclientapp.dagnabit.serviceimpl.service.DagnabitService;
 import com.onbelay.dagclientapp.dagnabit.snapshot.DagModelCollection;
 import com.onbelay.dagclientapp.dagnabit.snapshot.DagModelSnapshot;
 import org.springframework.beans.factory.annotation.Autowired;

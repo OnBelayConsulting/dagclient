@@ -13,6 +13,8 @@ public interface FloatIndexService {
 
     FloatIndexSnapshot load(EntityId entityId);
 
+    List<FloatIndexSnapshot> load(List<EntityId> ids);
+
     List<FloatIndexSnapshot> findByDefinedQuery(DefinedQuery definedQuery);
 
     FloatIndexSnapshot findByName(String floatIndexName);
