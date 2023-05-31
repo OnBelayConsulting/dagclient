@@ -3,7 +3,7 @@ package com.onbelay.dagclient.floatindex.model;
 import com.onbelay.core.entity.component.ApplicationContextFactory;
 import com.onbelay.core.entity.enums.EntityState;
 import com.onbelay.core.entity.model.AbstractEntity;
-import com.onbelay.core.entity.snapshot.EntitySlot;
+import com.onbelay.core.entity.snapshot.EntityId;
 import com.onbelay.dagclient.floatindex.repository.FloatIndexRepository;
 import com.onbelay.dagclient.floatindex.repositoryimpl.FloatIndexRepositoryBean;
 import com.onbelay.dagclient.floatindex.snapshot.FloatIndexDetail;
@@ -62,10 +62,13 @@ public class FloatIndex extends AbstractEntity {
     }
 
 
-    public EntitySlot generateSlot() {
-        return new EntitySlot(
-                getEntityId(),
-                detail.getName());
+    @Override
+    public EntityId generateEntityId() {
+        return new EntityId(
+                getId(),
+                detail.getName(),
+                detail.getDescription(),
+                false);
     }
 
 
@@ -89,8 +92,8 @@ public class FloatIndex extends AbstractEntity {
         if (snapshot.getBenchesToFloatIndexName() != null) {
             benchesToIndex = FloatIndex.getFloatIndexRepository().findByName(snapshot.getBenchesToFloatIndexName());
         } else if (snapshot.getBenchesToFloatIndexId() != null) {
-            if (snapshot.getBenchesToFloatIndexId().getEntityId().isSet())
-                benchesToIndex = getFloatIndexRepository().load(snapshot.getBenchesToFloatIndexId().getEntityId());
+            if (snapshot.getBenchesToFloatIndexId().isSet())
+                benchesToIndex = getFloatIndexRepository().load(snapshot.getBenchesToFloatIndexId());
             else
                 benchesToIndex = null;
         }

@@ -33,7 +33,7 @@ public class FloatIndexFixture {
         FloatIndexSnapshot snapshot = new FloatIndexSnapshot();
         snapshot.getDetail().setName(name);
         snapshot.getDetail().setType(type);
-        snapshot.setBenchesToFloatIndexId(benchesToIndex.generateSlot());
+        snapshot.setBenchesToFloatIndexId(benchesToIndex.generateEntityId());
 
         FloatIndex floatIndex = new FloatIndex();
         floatIndex.createWith(snapshot);

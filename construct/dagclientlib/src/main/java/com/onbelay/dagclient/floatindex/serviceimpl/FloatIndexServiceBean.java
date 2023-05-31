@@ -32,7 +32,7 @@ public class FloatIndexServiceBean implements FloatIndexService {
         if (snapshot.getEntityState() == EntityState.NEW) {
             FloatIndex floatIndex = new FloatIndex();
             floatIndex.createWith(snapshot);
-            return new TransactionResult(floatIndex.getEntityId());
+            return new TransactionResult(floatIndex.generateEntityId());
         } else if (snapshot.getEntityState() == EntityState.MODIFIED || snapshot.getEntityState() == EntityState.DELETE)  {
             FloatIndex floatIndex = floatIndexRepository.load(snapshot.getEntityId());
 

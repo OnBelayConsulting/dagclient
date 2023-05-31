@@ -14,7 +14,7 @@ public class FloatIndexAssembler extends EntityAssembler {
         setEntityAttributes(floatIndex, snapshot);
 
         if (floatIndex.getBenchesToIndex() != null)
-            snapshot.setBenchesToFloatIndexId(floatIndex.getBenchesToIndex().generateSlot());
+            snapshot.setBenchesToFloatIndexId(floatIndex.getBenchesToIndex().generateEntityId());
 
         snapshot.getDetail().shallowCopyFrom(floatIndex.getDetail());
         return snapshot;

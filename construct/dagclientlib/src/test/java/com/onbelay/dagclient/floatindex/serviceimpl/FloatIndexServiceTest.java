@@ -2,14 +2,13 @@ package com.onbelay.dagclient.floatindex.serviceimpl;
 
 import com.onbelay.core.entity.enums.EntityState;
 import com.onbelay.core.entity.snapshot.EntityId;
-import com.onbelay.core.entity.snapshot.EntitySlot;
 import com.onbelay.core.entity.snapshot.TransactionResult;
 import com.onbelay.core.query.enums.ExpressionOperator;
 import com.onbelay.core.query.snapshot.DefinedQuery;
 import com.onbelay.core.query.snapshot.DefinedWhereExpression;
 import com.onbelay.dagclient.common.DagnabitSpringTestCase;
-import com.onbelay.dagclient.floatindex.model.FloatIndexFixture;
 import com.onbelay.dagclient.floatindex.model.FloatIndex;
+import com.onbelay.dagclient.floatindex.model.FloatIndexFixture;
 import com.onbelay.dagclient.floatindex.repository.FloatIndexRepository;
 import com.onbelay.dagclient.floatindex.service.FloatIndexService;
 import com.onbelay.dagclient.floatindex.snapshot.FloatIndexSnapshot;
@@ -144,11 +143,9 @@ public class FloatIndexServiceTest extends DagnabitSpringTestCase {
 
         FloatIndexSnapshot snapshot = new FloatIndexSnapshot();
         snapshot.setEntityState(EntityState.MODIFIED);
-        snapshot.setEntityId(secondIndex.getEntityId());
+        snapshot.setEntityId(secondIndex.generateEntityId());
 
-        snapshot.setBenchesToFloatIndexId(
-                new EntitySlot(EntityId.makeNullEntityId(),
-                               ""));
+        snapshot.setBenchesToFloatIndexId(EntityId.makeNullEntityId());
 
         snapshots.add(snapshot);
 

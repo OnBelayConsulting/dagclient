@@ -2,11 +2,11 @@ package com.onbelay.dagclient.floatindex.snapshot;
 
 
 import com.onbelay.core.entity.snapshot.AbstractSnapshot;
-import com.onbelay.core.entity.snapshot.EntitySlot;
+import com.onbelay.core.entity.snapshot.EntityId;
 
 public class FloatIndexSnapshot extends AbstractSnapshot {
 
-    private EntitySlot benchesToFloatIndexId;
+    private EntityId benchesToFloatIndexId;
     private String benchesToFloatIndexName;
 
     private FloatIndexDetail detail = new FloatIndexDetail();
@@ -19,11 +19,11 @@ public class FloatIndexSnapshot extends AbstractSnapshot {
         this.detail = detail;
     }
 
-    public EntitySlot getBenchesToFloatIndexId() {
+    public EntityId getBenchesToFloatIndexId() {
         return benchesToFloatIndexId;
     }
 
-    public void setBenchesToFloatIndexId(EntitySlot benchesToFloatIndexId) {
+    public void setBenchesToFloatIndexId(EntityId benchesToFloatIndexId) {
         this.benchesToFloatIndexId = benchesToFloatIndexId;
     }
 
