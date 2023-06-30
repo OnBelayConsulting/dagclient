@@ -1,5 +1,6 @@
 package com.onbelay.dagclientapp.floatindex.filewriter;
 
+import com.onbelay.core.entity.snapshot.EntityId;
 import com.onbelay.dagclient.common.DagnabitSpringTestCase;
 import com.onbelay.dagclient.floatindex.snapshot.FloatIndexSnapshot;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class FloatIndexFileWriterTest extends DagnabitSpringTestCase {
         snapshot = new FloatIndexSnapshot();
         snapshot.getDetail().setName("Sammy");
         snapshot.getDetail().setType("Basis");
-        snapshot.setBenchesToFloatIndexName("Fred");
+        snapshot.setBenchesToFloatIndexId(new EntityId("Fred"));
         nodes.add(snapshot);
 
         FloatIndexFileWriter writer = new FloatIndexFileWriter(nodes);
@@ -39,7 +40,7 @@ public class FloatIndexFileWriterTest extends DagnabitSpringTestCase {
         String contentLine = reader.readLine();
         assertEquals("Name,Type,Description,BenchesTo", headerLine);
 
-        assertEquals("Fred,Family,Fred Index", contentLine);
+        assertEquals("Fred,Family,Fred Index,", contentLine);
 
     }
 

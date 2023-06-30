@@ -40,7 +40,8 @@ public class GraphRelationshipPublisherBean implements GraphRelationshipPublishe
 
         PubGraphRelationshipConverter converter = new PubGraphRelationshipConverter();
         List<PubGraphRelationshipSnapshot> snapshots =    converter.convert(snapshotsIn);
-        streamBridge.send(queueName, snapshots);
+        if (snapshots.size() > 0)
+            streamBridge.send(queueName, snapshots);
     }
 
 }

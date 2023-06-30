@@ -41,7 +41,7 @@ public class FloatIndexFileWriter extends FloatIndexFileHeader {
                             snapshot.getDetail().getName(),
                             snapshot.getDetail().getType(),
                             snapshot.getDetail().getDescription(),
-                            snapshot.getBenchesToFloatIndexName());
+                            snapshot.getBenchesToFloatIndexId() != null ? snapshot.getBenchesToFloatIndexId().getCode() : "");
                 }
             } catch (IOException e) {
                 logger.error("Writing node csv file failed with: ", e);

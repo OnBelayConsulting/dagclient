@@ -2,6 +2,8 @@ package com.onbelay.dagclient.floatindex.repositoryimpl;
 
 import com.onbelay.core.entity.repository.BaseRepository;
 import com.onbelay.core.entity.snapshot.EntityId;
+import com.onbelay.core.enums.CoreTransactionErrorCode;
+import com.onbelay.core.exception.OBRuntimeException;
 import com.onbelay.core.query.snapshot.DefinedQuery;
 import com.onbelay.core.query.snapshot.QuerySelectedPage;
 import com.onbelay.dagclient.floatindex.repository.FloatIndexRepository;
@@ -24,8 +26,16 @@ public class FloatIndexRepositoryBean extends BaseRepository<FloatIndex> impleme
     private FloatIndexColumnDefinitions floatIndexColumnDefinitions;
 
     public FloatIndex load(EntityId entityId) {
+        if (entityId.isNull())
+            return null;
+
+        if (entityId.isInvalid())
+            throw new OBRuntimeException(CoreTransactionErrorCode.ENTITY_DELETE_FAIL.getCode());
+
         if (entityId.isSet())
             return find(FloatIndex.class, entityId.getId());
+        else if (entityId.getCode() != null)
+            return findByName(entityId.getCode());
         else
             return null;
     }

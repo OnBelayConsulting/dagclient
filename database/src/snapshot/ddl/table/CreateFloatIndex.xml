@@ -1,0 +1,46 @@
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	logicalFilePath="/com/onbelay/dagclient/table/CreateFloatIndex.xml">
+	
+  <changeSet author="lefeuvrem" id="1.0" objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+  
+    
+   <createSequence
+   		incrementBy="1"
+   		sequenceName="DC_FLOAT_INDEX_SEQ"
+		cacheSize='100'
+		cycle = "false"
+   		startValue="1"	
+   />
+   
+      <createTable tableName="DC_FLOAT_INDEX" tablespace="${tblspace_data}">
+      <column 
+			name="FLOAT_INDEX_ID" 
+			defaultValueSequenceNext="DC_FLOAT_INDEX_SEQ" 
+			type="java.sql.Types.NUMERIC(10, 0)">
+        <constraints 
+			primaryKey="true" 
+			primaryKeyName="FLOAT_INDEX_PK" 
+			nullable="false" />
+      </column>
+      <column 
+			name="BENCHES_TO_FLOAT_INDEX_ID" type="java.sql.Types.NUMERIC(10, 0)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="INDEX_NAME" remarks="type" type="java.sql.Types.VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="INDEX_TYPE" remarks="Name of node" type="java.sql.Types.VARCHAR(60)">
+          <constraints nullable="false"/>
+      </column>
+      <column name="INDEX_DESCRIPTION" remarks="description" type="java.sql.Types.VARCHAR(2048)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="OPTIMISTIC_LOCK_NO" remarks="Version number." defaultValueNumeric="0" type="java.sql.Types.NUMERIC(10, 0)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>

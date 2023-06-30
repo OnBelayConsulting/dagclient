@@ -22,12 +22,12 @@ public class FloatIndexFileReaderTest extends DagnabitSpringTestCase  {
         FloatIndexSnapshot first = nodes.get(0);
         assertEquals("FirstIndex", first.getDetail().getName());
         assertEquals("Hub", first.getDetail().getType());
-        assertNull(first.getBenchesToFloatIndexName());
+        assertNull(first.getBenchesToFloatIndexId());
 
         FloatIndexSnapshot third = nodes.get(2);
         assertEquals("ThirdBasis", third.getDetail().getName());
         assertEquals("Basis", third.getDetail().getType());
-        assertEquals("FirstIndex", third.getBenchesToFloatIndexName());
+        assertEquals("FirstIndex", third.getBenchesToFloatIndexId().getCode());
 
     }
 

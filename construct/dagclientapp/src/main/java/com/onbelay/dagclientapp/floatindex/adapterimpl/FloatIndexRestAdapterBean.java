@@ -1,5 +1,6 @@
 package com.onbelay.dagclientapp.floatindex.adapterimpl;
 
+import com.onbelay.core.controller.BaseRestAdapterBean;
 import com.onbelay.core.entity.snapshot.TransactionResult;
 import com.onbelay.core.query.parsing.DefinedQueryBuilder;
 import com.onbelay.core.query.snapshot.QuerySelectedPage;
@@ -19,7 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @Service
-public class FloatIndexRestAdapterBean implements FloatIndexRestAdapter {
+public class FloatIndexRestAdapterBean extends BaseRestAdapterBean implements FloatIndexRestAdapter {
 
     @Autowired
     private FloatIndexService floatIndexService;
@@ -32,6 +33,7 @@ public class FloatIndexRestAdapterBean implements FloatIndexRestAdapter {
 
     @Override
     public TransactionResult save(FloatIndexSnapshot snapshot) {
+        initializeSession();
         TransactionResult result =  floatIndexService.save(snapshot);
         FloatIndexSnapshot updated = floatIndexService.load(result.getEntityId());
         graphNodePublisher.publish(updated);
@@ -40,6 +42,7 @@ public class FloatIndexRestAdapterBean implements FloatIndexRestAdapter {
 
     @Override
     public TransactionResult save(List<FloatIndexSnapshot> snapshots) {
+        initializeSession();
         TransactionResult result =  floatIndexService.save(snapshots);
         List<FloatIndexSnapshot> updated = floatIndexService.load(result.getEntityIds());
         graphNodePublisher.publish(updated);
@@ -51,6 +54,7 @@ public class FloatIndexRestAdapterBean implements FloatIndexRestAdapter {
             int start,
             int limit,
             String query) {
+        initializeSession();
 
         DefinedQueryBuilder queryBuilder = new DefinedQueryBuilder("FloatIndex", query);
 
@@ -87,6 +91,7 @@ public class FloatIndexRestAdapterBean implements FloatIndexRestAdapter {
     public TransactionResult uploadFile(
             String name,
             byte[] fileContents) {
+        initializeSession();
 
         ByteArrayInputStream fileStream = new ByteArrayInputStream(fileContents);
 
@@ -97,6 +102,7 @@ public class FloatIndexRestAdapterBean implements FloatIndexRestAdapter {
 
     @Override
     public FileResult generateCSVFile(String query) {
+        initializeSession();
         DefinedQueryBuilder queryBuilder = new DefinedQueryBuilder("FloatIndex", query);
 
         QuerySelectedPage page = floatIndexService.findIdsByDefinedQuery(queryBuilder.build());

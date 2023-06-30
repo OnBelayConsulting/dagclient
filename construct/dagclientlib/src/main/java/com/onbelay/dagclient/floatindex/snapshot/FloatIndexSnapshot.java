@@ -7,7 +7,6 @@ import com.onbelay.core.entity.snapshot.EntityId;
 public class FloatIndexSnapshot extends AbstractSnapshot {
 
     private EntityId benchesToFloatIndexId;
-    private String benchesToFloatIndexName;
 
     private FloatIndexDetail detail = new FloatIndexDetail();
 
@@ -25,13 +24,5 @@ public class FloatIndexSnapshot extends AbstractSnapshot {
 
     public void setBenchesToFloatIndexId(EntityId benchesToFloatIndexId) {
         this.benchesToFloatIndexId = benchesToFloatIndexId;
-    }
-
-    public String getBenchesToFloatIndexName() {
-        return benchesToFloatIndexName;
-    }
-
-    public void setBenchesToFloatIndexName(String benchesToFloatIndexName) {
-        this.benchesToFloatIndexName = benchesToFloatIndexName;
     }
 }

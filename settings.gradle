@@ -1,3 +1,4 @@
 rootProject.name = 'dagclient'
 include ':construct:dagclientlib',
-        ':construct:dagclientapp'
+        ':construct:dagclientapp',
+        'database'

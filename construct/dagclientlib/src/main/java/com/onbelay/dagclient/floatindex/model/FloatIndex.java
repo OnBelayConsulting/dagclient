@@ -89,13 +89,8 @@ public class FloatIndex extends AbstractEntity {
 
     private void updateRelationships(FloatIndexSnapshot snapshot) {
 
-        if (snapshot.getBenchesToFloatIndexName() != null) {
-            benchesToIndex = FloatIndex.getFloatIndexRepository().findByName(snapshot.getBenchesToFloatIndexName());
-        } else if (snapshot.getBenchesToFloatIndexId() != null) {
-            if (snapshot.getBenchesToFloatIndexId().isSet())
-                benchesToIndex = getFloatIndexRepository().load(snapshot.getBenchesToFloatIndexId());
-            else
-                benchesToIndex = null;
+        if (snapshot.getBenchesToFloatIndexId() != null) {
+            benchesToIndex = getFloatIndexRepository().load(snapshot.getBenchesToFloatIndexId());
         }
     }
 

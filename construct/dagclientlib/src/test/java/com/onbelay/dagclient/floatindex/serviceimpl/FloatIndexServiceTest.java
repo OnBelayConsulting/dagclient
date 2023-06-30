@@ -122,7 +122,7 @@ public class FloatIndexServiceTest extends DagnabitSpringTestCase {
         snapshot.getDetail().setName("MyMyIndex");
         snapshot.getDetail().setType("MyType");
         snapshot.getDetail().setDescription("desc");
-        snapshot.setBenchesToFloatIndexName("HarryIndex");
+        snapshot.setBenchesToFloatIndexId(firstIndex.generateEntityId());
         snapshots.add(snapshot);
 
         TransactionResult result = floatIndexService.save(snapshots);
@@ -130,9 +130,9 @@ public class FloatIndexServiceTest extends DagnabitSpringTestCase {
 
         FloatIndexSnapshot snapshotFound = floatIndexService.findByName("MyMyIndex");
         TestCase.assertNotNull(snapshotFound);
-        TestCase.assertEquals("HarryIndex", snapshotFound.getBenchesToFloatIndexName());
+        TestCase.assertEquals("HarryIndex", snapshotFound.getBenchesToFloatIndexId().getCode());
         TestCase.assertNotNull(snapshotFound.getBenchesToFloatIndexId());
-        assertEquals(firstIndex.getId(), snapshotFound.getBenchesToFloatIndexId());
+        assertEquals(firstIndex.getId(), snapshotFound.getBenchesToFloatIndexId().getId());
     }
 
 

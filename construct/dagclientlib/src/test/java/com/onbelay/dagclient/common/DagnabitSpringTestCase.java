@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@ComponentScan(basePackages = {"com.onbelay.*"})
+@ComponentScan(basePackages = {"com.onbelay.core.*", "com.onbelay.dagclientapp.*"})
 @EntityScan(basePackages = {"com.onbelay.*"})
 @RunWith(SpringRunner.class)
 @TestPropertySource( locations="classpath:application-integrationtest.properties")

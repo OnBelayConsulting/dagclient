@@ -1,5 +1,6 @@
 package com.onbelay.dagclientapp.floatindex.controller;
 
+import com.onbelay.core.controller.BaseRestController;
 import com.onbelay.core.entity.snapshot.TransactionResult;
 import com.onbelay.core.errorhandling.ErrorMessageService;
 import com.onbelay.core.exception.OBRuntimeException;
@@ -26,14 +27,12 @@ import java.util.Map;
 
 @RestController
 @Tag(name="FloatIndex", description = "APIs to manage persisted FloatIndices.")
-@RequestMapping("/api/floatIndices")public class FloatIndexRestController {
+@RequestMapping("/api/floatIndices")
+public class FloatIndexRestController extends BaseRestController {
     private static final Logger logger = LogManager.getLogger();
 
     @Autowired
     private FloatIndexRestAdapter floatIndexRestAdapter;
-    
-    @Autowired
-    private ErrorMessageService errorMessageService;
 
     @Operation(summary = "Save a new FloatIndex", description = "Create a persisted FloatIndex by unique name.",
             tags = {"node"})
@@ -72,14 +71,8 @@ import java.util.Map;
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
 
-        if (result.isSuccessful()) {
-            return new ResponseEntity(result, headers, HttpStatus.OK);
-        } else {
-            return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-        }
-
+        return processResponse(result);
     }
-
 
     @Operation(summary = "Save multiple FloatIndexs", description = "Create multiple persisted FloatIndexs by unique names.",
             tags = {"model"})
@@ -115,15 +108,7 @@ import java.util.Map;
             result = new TransactionResult(bre.getMessage());
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json; charset=utf-8");
-
-        if (result.isSuccessful()) {
-            return new ResponseEntity(result, headers, HttpStatus.OK);
-        } else {
-            return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
-        }
-
+        return processResponse(result);
     }
 
     @Operation(summary = "Find zero or more FloatIndexs", description = "Find using an optional query - zero or more existing graph nodes",
@@ -198,16 +183,7 @@ import java.util.Map;
             result = new TransactionResult("Invalid File");
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json; charset=utf-8");
-
-        if (result.isSuccessful()) {
-            return new ResponseEntity<>(result, headers, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(result, headers, HttpStatus.BAD_REQUEST);
-        }
-
-
+        return processResponse(result);
     }
 
     @Operation(summary = "Download a csv FloatIndexs file", description = "Download a file in CSV format with an optional query to filter..",

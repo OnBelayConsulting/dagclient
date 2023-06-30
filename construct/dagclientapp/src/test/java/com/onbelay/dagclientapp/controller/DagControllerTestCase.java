@@ -5,6 +5,7 @@ import com.onbelay.dagclient.common.DagnabitSpringTestCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -13,8 +14,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
+@WithMockUser
 public abstract class DagControllerTestCase extends DagnabitSpringTestCase{
-
 
 	@Autowired
 	protected ObjectMapper objectMapper;
@@ -29,7 +30,6 @@ public abstract class DagControllerTestCase extends DagnabitSpringTestCase{
 		
 	    mappingJackson2HttpMessageConverter.setObjectMapper(objectMapper);
 
-		
 	}
 
 	protected MockMvc generateMockMvc(Object restController,

@@ -1,5 +1,6 @@
 package com.onbelay.dagclientapp.floatindex.filereader;
 
+import com.onbelay.core.entity.snapshot.EntityId;
 import com.onbelay.core.exception.OBRuntimeException;
 import com.onbelay.dagclient.enums.TransactionErrorCode;
 import com.onbelay.dagclient.floatindex.snapshot.FloatIndexSnapshot;
@@ -44,7 +45,7 @@ public class FloatIndexFileReader extends FloatIndexFileHeader {
                 snapshot.getDetail().setType(record.get(HEADER_TYPE));
                 snapshot.getDetail().setDescription(record.get(HEADER_DESCRIPTION));
                 if (record.isSet(HEADER_BENCHES_TO))
-                    snapshot.setBenchesToFloatIndexName(record.get(HEADER_BENCHES_TO));
+                    snapshot.setBenchesToFloatIndexId(new EntityId(record.get(HEADER_BENCHES_TO)));
 
                 snapshots.add(snapshot);
             }

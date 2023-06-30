@@ -36,8 +36,8 @@ repositories {
 		name = "GitHubPackages"
 		url = uri("https://maven.pkg.github.com/onbelayconsulting/obcorelib")
 		credentials {
-			username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-			password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+			username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+			password = project.findProperty("gpr.key") ?: System.getenv("GPR_TOKEN")
 		}
 	}
 }
@@ -48,8 +48,8 @@ targetCompatibility = 11
 dependencies {
 	implementation project(':construct:dagclientlib')
 	testImplementation project(path: ':construct:dagclientlib', configuration: 'tests')
-	implementation group: "com.onbelay.core", name: "obcore", version: "1.+"
-	testImplementation group: "com.onbelay.core", name: "obcoretest", version: "1.+", classifier: 'tests'
+	implementation group: "com.onbelay.core", name: "obcore", version: "1.0.0"
+	testImplementation group: "com.onbelay.core", name: "obcoretest", version: "1.0.0", classifier: 'tests'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
@@ -76,8 +76,6 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation("org.junit.vintage:junit-vintage-engine")
-	testImplementation files("../libs/obcorelib-tests.jar")
-	implementation files("../libs/obcorelib-0.1.0.jar")
 
 
 	// Rabbit MQ
