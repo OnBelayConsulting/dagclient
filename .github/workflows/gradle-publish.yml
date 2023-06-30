@@ -98,7 +98,6 @@ jobs:
         GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
         GPR_USER: ${{ secrets.GPR_USER }}
 
-
     - name: run gradle build
       run: |
         cd construct/dagclientapp
