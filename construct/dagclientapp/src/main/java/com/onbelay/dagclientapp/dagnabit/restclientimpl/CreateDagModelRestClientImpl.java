@@ -5,6 +5,7 @@ import com.onbelay.dagclientapp.common.exception.ApplicationWebClientException;
 import com.onbelay.dagclientapp.common.snapshot.WebResult;
 import com.onbelay.dagclientapp.dagnabit.restclient.CreateDagModelRestClient;
 import com.onbelay.dagclientapp.dagnabit.snapshot.DagModelSnapshot;
+import com.onbelay.dagclientapp.dagnabit.snapshot.ModelResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class CreateDagModelRestClientImpl extends AbstractDagModelRestClient imp
     }
 
     @Override
-    public WebResult saveDagModels(List<DagModelSnapshot> snapshots) {
+    public ModelResult saveDagModel(DagModelSnapshot snapshot) {
 
         String riskAppUrl = String.format(
                 URL,
@@ -56,7 +57,7 @@ public class CreateDagModelRestClientImpl extends AbstractDagModelRestClient imp
 
         String errorDetected;
         try {
-             return this.webClient.put()
+             return this.webClient.post()
                      .uri(uriBuilder -> uriBuilder
                              .scheme("http")
                              .host(host)
@@ -65,9 +66,9 @@ public class CreateDagModelRestClientImpl extends AbstractDagModelRestClient imp
                              .path(URL)
                     .build())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .bodyValue(snapshots)
+                    .bodyValue(snapshot)
                     .retrieve()
-                    .bodyToMono(WebResult.class)
+                    .bodyToMono(ModelResult.class)
                      .retryWhen(Retry.backoff(3, Duration.ofSeconds(10))
                                         .filter(checkThrowable)
                                         .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) ->

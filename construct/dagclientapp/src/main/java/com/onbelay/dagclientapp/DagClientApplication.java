@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @EnableWebSecurity
-@ComponentScan(basePackages = {"com.onbelay.*"})
+@ComponentScan(basePackages = {"com.onbelay.core.*", "com.onbelay.dagclientapp.*", "com.onbelay.dagclient.*"})
 @EntityScan(basePackages = {"com.onbelay.*"})
 @SpringBootApplication
 public class DagClientApplication {

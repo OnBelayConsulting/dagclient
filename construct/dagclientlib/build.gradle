@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.5'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'org.springframework.boot' version '3.1.1'
+	id 'io.spring.dependency-management' version '1.1.0'
 	id 'java'
 	id 'idea'
 }
@@ -22,7 +22,7 @@ repositories {
 dependencyManagement {
 
 	imports {
-		mavenBom 'org.springframework.boot:spring-boot-dependencies:2.7.5'
+		mavenBom 'org.springframework.boot:spring-boot-dependencies:3.1.1'
 	}
 
 	dependencies {
@@ -30,12 +30,12 @@ dependencyManagement {
 	}
 }
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 17
+targetCompatibility = 17
 
 dependencies {
-	implementation group: "com.onbelay.core", name: "obcore", version: "1.0.0"
-	testImplementation group: "com.onbelay.core", name: "obcoretest", version: "1.0.0", classifier: 'tests'
+	implementation group: "com.onbelay.core", name: "obcore", version: "2.1.0"
+	testImplementation group: "com.onbelay.core", name: "obcoretest", version: "2.1.0", classifier: 'tests'
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation "com.fasterxml.jackson.core:jackson-core"
@@ -68,19 +68,11 @@ test {
 
 jar {
 	enabled = true
-	baseName = 'DAGClientlib'
+	archiveBaseName = 'DAGClientlib'
 	version = '1.0.0-SNAPSHOT'
 	manifest {
 		attributes("Implementation-Title": "Dagclientlib", "Implementation-Version": "1.0", "Created-By": "OnBelay Consulting")
 	}
-}
-
-task srcZip (type: Zip) {
-	
-	classifier = 'src'
-	from projectDir
-	include 'src/**/*'
-	
 }
 
 task construct (dependsOn: ["build", "srcZip"])

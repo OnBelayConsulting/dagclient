@@ -8,8 +8,8 @@ import com.onbelay.dagclient.floatindex.repository.FloatIndexRepository;
 import com.onbelay.dagclient.floatindex.repositoryimpl.FloatIndexRepositoryBean;
 import com.onbelay.dagclient.floatindex.snapshot.FloatIndexDetail;
 import com.onbelay.dagclient.floatindex.snapshot.FloatIndexSnapshot;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "DC_FLOAT_INDEX")

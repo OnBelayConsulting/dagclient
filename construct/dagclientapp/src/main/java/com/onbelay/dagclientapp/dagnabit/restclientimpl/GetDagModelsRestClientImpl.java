@@ -7,6 +7,7 @@ import com.onbelay.dagclientapp.dagnabit.snapshot.DagModelCollection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientException;
@@ -17,6 +18,8 @@ import java.time.Duration;
 public class GetDagModelsRestClientImpl extends AbstractDagModelRestClient implements GetDagModelsRestClient {
 
     private static final Logger logger = LogManager.getLogger();
+    @Value(value ="${dagnabit.useServiceWebClient:false}")
+    private boolean useServiceWebClient = false;
 
     private String host;
 
@@ -29,12 +32,15 @@ public class GetDagModelsRestClientImpl extends AbstractDagModelRestClient imple
     @Autowired
     private WebClient webClient;
 
+    @Autowired
+    private WebClient serviceWebClient;
+
     private static final String URL = "/api/models";
 
     public GetDagModelsRestClientImpl(
             String host,
             String port,
-            String baAppPath) {
+            String contextPath) {
         this.host = host;
         this.port = port;
         this.contextPath = contextPath;
@@ -48,8 +54,14 @@ public class GetDagModelsRestClientImpl extends AbstractDagModelRestClient imple
 
         DagModelCollection snapshot;
 
+        WebClient ourWebClient;
+        if (useServiceWebClient)
+            ourWebClient = serviceWebClient;
+        else
+            ourWebClient = webClient;
+
         try {
-            snapshot = this.webClient.get()
+            snapshot = ourWebClient.get()
                     .uri(uriBuilder -> uriBuilder
                             .scheme("http")
                             .host(host)

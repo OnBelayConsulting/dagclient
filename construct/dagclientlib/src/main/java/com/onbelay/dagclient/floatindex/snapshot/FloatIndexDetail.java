@@ -2,8 +2,8 @@ package com.onbelay.dagclient.floatindex.snapshot;
 
 import com.onbelay.core.exception.OBValidationException;
 import com.onbelay.dagclient.enums.TransactionErrorCode;
+import jakarta.persistence.Column;
 
-import javax.persistence.Column;
 
 public class FloatIndexDetail {
 
